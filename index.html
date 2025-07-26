@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            font-family: 'Courier New', Courier, monospace;
+        }
+    </style>
+</head>
+<body>
+    <section>
+        <p id="show">00 : 00 : 00</p>
+
+        <button id="startButton" onclick="continueTimer()">Start</button>
+        <button onclick="stopTimer()">Stop</button>
+        <button onclick="pause()">Pause</button>
+        <button onclick="resume()">Resume</button>
+    </section>
+
+    <script>
+        const result = document.getElementById('show')
+        show.textContent
+        let checkTimer;
+        let isRunning = false;
+        let elapsedTime = 0
+        let paused = false
+
+        
+
+
+        const startButton = document.getElementById('startButton')
+        
+        const continueTimer = () =>{
+            
+            if (isRunning){
+                alert('timer already running')
+            }else{
+                isRunning = true
+                const startTime = Date.now()
+
+                checkTimer = setInterval(()=>{ 
+                    const currentTime = Date.now()  
+                    let finalTime = currentTime - startTime
+                    const hours = Math.floor((finalTime/3600000)%60)
+                    const minutes = Math.floor((finalTime/60000) % 60)
+                    const seconds = Math.floor( (finalTime/1000) %60)
+                    show.textContent = `${hours < 10 ? '0' + hours : hours} : ${minutes <10 ? '0' + minutes : minutes} : ${seconds < 10 ? '0' + seconds : seconds}`
+                    
+                }, 1000)
+            }
+            startButton.textContent = 'Continue'
+        }
+
+        const stopTimer = () =>{
+            isRunning = false
+            clearInterval(checkTimer)
+            show.textContent = '00 : 00 : 00'
+            // show.textContent = `${hours < 10 ? hours + '0' : hours} : ${minutes <10 ? minutes + '0' : minutes} : ${seconds < 10 ? '0' + seconds : seconds}`
+            startButton.textContent = 'Start'
+
+
+        }
+
+        let startingTime;
+        const pause = () => {
+        if (isRunning) {
+            isRunning = false;
+            elapsedTime = Date.now() - startingTime
+            clearInterval(checkTimer);
+        }
+    };
+
+
+
+
+    </script>
+</body>
+</html>
